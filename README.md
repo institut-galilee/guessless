@@ -1,7 +1,7 @@
 # Guessless Project
 
 ## Membres :
-* Maher LAAROUSSI (maher.laaroussi@gmail.com) [MaherLRS](https://github.com/MaherLRS "MaherLRS")
+* Maher LAAROUSSI (maher.laaroussi@gmail.com) [MaherLRS](https://github.com/maherlaaroussi "MaherLRS")
 * Aboubakr CHOUTTA (achoutta@gmail.com)  [aboubakrCH](https://github.com/aboubakrCH "aboubakrCH")
 * Hamid OUFKIR (hamid.oufkir@yahoo.com) [HamidOuF](https://github.com/HamidOuF "HamidOuF")
 * Othmane MCHOUAT (mchouat.o@gmail.com)  [othmaneMCHOUAT](https://github.com/othmaneMCHOUAT "othmaneMCHOUAT")
@@ -18,12 +18,16 @@ Des haut-parleurs seront présents.
 
 
 ## Composants :
-* 2x LED RGB 64x64 P3 Panel
-* Raspberry Pi Zero W + ESP32
-* 2x Caméra Raspberry Pi (2 pour mesurer la distance).
-* Power supply (5V 20A)
+* Matrix LED RGB 64x32 Panel
+* Raspberry Pi Zero WH
+* Raspberry Pi Zero 3 B+
+* 2x Caméra Raspberry Pi
+* Power supply
 * Câbles & fils
-* Puce RFID
-* Plaque
+* Plaque Plexiglass
 * Balance
 * 2x Haut-Parleurs
+
+## Sources :
+* http://blog.deconinck.info/post/2016/12/19/A-Dirt-Cheap-F-Awesome-Led-Table
+* https://www.youtube.com/watch?v=npZ-8Nj1YwY

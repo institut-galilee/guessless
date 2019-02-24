@@ -4,8 +4,8 @@ Commencez par cloner ce dépot :
 `git clone https://github.com/institut-galilee/guessless.git`
 
 #### 2e étape : Configuration
-Ensuite continuez par configurer votre git en mettant votre nom d'utilisateur github et votre adresse mail, la même que celle présente dans votre compte :
-`git config user.name "maherlaaroussi"`
+Ensuite configurez votre git en mettant votre nom d'utilisateur github et votre adresse mail, la même que celle présente dans votre compte :  
+`git config user.name "maherlaaroussi"`  
 `git config user.email "maher@outlook.fr"`
 
 #### 3e étape : Commit & Push
@@ -13,3 +13,7 @@ Puis faites votre vie en modifiant ou en ajoutant des fichiers et ensuite à cha
 `git add *`
 `git commit -m "Un message ici"`
 `git push`
+
+#### 4e étape : Pull
+A chaque fois que vous voulez commencez à travailler sur le projet, faîtes un pull pour importer toutes les modifications faite au dépot depuis le dernier pull :  
+`git pull`

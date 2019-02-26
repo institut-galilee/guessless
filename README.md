@@ -31,13 +31,14 @@ Pour l'instant, le projet est en cours de conception mais on vous tiendra au cou
 
 Plusieurs améliorations sont prévues pour notre table comme la reconnaissance vocale, la comparaison de deux aliments et l'apairage avec un smartphone.
 
+
 ## Composants :
 
 * Matrix LED RGB 64x32 Panel
 * Raspberry Pi Zero WH
 * Raspberry Pi Zero 3 B+
 * 2x Caméra Raspberry Pi
-* Power supply
+* 2x Power supply (Raspberry & LED Panel)
 * Câbles & fils
 * Plaque Plexiglass
 * Balance

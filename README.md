@@ -16,6 +16,11 @@ Table ludique connectée permettant de détécter n'importe quel objet posé à 
 De la reconnaissance faciale et vocale pourront être mis en place dans le futur.
 Des haut-parleurs seront présents.
 
+## Image :
+
+![alt text](https://github.com/institut-galilee/guessless/blob/master/Docs/Design.png)
+
+
 
 ## Composants :
 * Matrix LED RGB 64x32 Panel

@@ -9,7 +9,7 @@
 
 ## Nom du produit IoT : Guessless
 
-![alt text](https://github.com/institut-galilee/guessless/blob/master/Docs/Design.png)
+![alt text](https://github.com/institut-galilee/guessless/blob/master/docs/Design.png)
 
 ## C'est quoi guessless ?
 

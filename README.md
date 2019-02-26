@@ -1,7 +1,7 @@
 # Guessless Project
 
 ## Membres :
-* Maher LAAROUSSI (maher.laaroussi@gmail.com) [MaherLRS](https://github.com/maherlaaroussi "MaherLRS")
+* Maher LAAROUSSI (maher.laaroussi@gmail.com) [MaherLRS](https://github.com/maherlaaroussi "maherlaaroussi")
 * Aboubakr CHOUTTA (achoutta@gmail.com)  [aboubakrCH](https://github.com/aboubakrCH "aboubakrCH")
 * Hamid OUFKIR (hamid.oufkir@yahoo.com) [HamidOuF](https://github.com/HamidOuF "HamidOuF")
 * Othmane MCHOUAT (mchouat.o@gmail.com)  [othmaneMCHOUAT](https://github.com/othmaneMCHOUAT "othmaneMCHOUAT")
@@ -19,6 +19,8 @@ Des haut-parleurs seront présents.
 ## Image :
 
 ![alt text](https://github.com/institut-galilee/guessless/blob/master/Docs/Design.png)
+
+# Technique :
 
 
 

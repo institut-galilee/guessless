@@ -7,6 +7,7 @@ from picamera import PiCamera
 import tensorflow as tf
 import argparse
 import sys
+import wiki
 
 # Minimum score
 min_score = 0.5
@@ -120,14 +121,7 @@ if camera_type == 'picamera':
         time1 = (t2-t1)/freq
         frame_rate_calc = 1/time1
 
-        objects = []
-        for index, value in enumerate(classes[0]):
-            object_dict = {}
-            if scores[0, index] > min_score:
-            object_dict[(category_index.get(value)).get('name').encode('utf8')] = \
-            scores[0, index]
-            objects.append(object_dict)
-        print(str(objects))
+        print(str(classes[0][0]) + " : " + wiki.search(classes[0][0]))
 
         # Press 'q' to quit
         if cv2.waitKey(1) == ord('q'):

@@ -32,6 +32,10 @@ Pour l'instant, le projet est en cours de conception mais on vous tiendra au cou
 Plusieurs améliorations sont prévues pour notre table comme la reconnaissance vocale, la comparaison de deux aliments et l'apairage avec un smartphone.
 
 
+# Help ?
+## Où mettre les fichiers source ?
+Les fichiers sources sont à placer dans le répertoire `tensorflow/models/research/object_detection/`
+
 ## Composants :
 
 * Matrix LED RGB 64x32 Panel
@@ -43,14 +47,6 @@ Plusieurs améliorations sont prévues pour notre table comme la reconnaissance 
 * Plaque Plexiglass
 * Balance
 * 2x Haut-Parleurs
-
-
-# Help ?
-## Où mettre les fichiers source ?
-Il doit être placé dans le dossier `object_detection` qui se trouve dans `tensorflow/models/research/object_detection`.
-
-Plusieurs améliorations sont prévues pour notre table comme la reconnaissance vocale, la comparaison de deux aliments et l'apairage avec un smartphone.
-
 
 ## Crédits :
 * http://blog.deconinck.info/post/2016/12/19/A-Dirt-Cheap-F-Awesome-Led-Table

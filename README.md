@@ -44,6 +44,14 @@ Plusieurs améliorations sont prévues pour notre table comme la reconnaissance 
 * Balance
 * 2x Haut-Parleurs
 
+
+# Help ?
+## Où mettre les fichiers source ?
+Il doit être placé dans le dossier `object_detection` qui se trouve dans `tensorflow/models/research/object_detection`.
+
+Plusieurs améliorations sont prévues pour notre table comme la reconnaissance vocale, la comparaison de deux aliments et l'apairage avec un smartphone.
+
+
 ## Crédits :
 * http://blog.deconinck.info/post/2016/12/19/A-Dirt-Cheap-F-Awesome-Led-Table
 * https://www.youtube.com/watch?v=npZ-8Nj1YwY

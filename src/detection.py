@@ -7,6 +7,7 @@ from picamera import PiCamera
 import tensorflow as tf
 import argparse
 import sys
+from wiki import *
 
 # Camera resolution
 IM_WIDTH = 640
@@ -103,6 +104,7 @@ if camera_type == 'picamera':
             np.squeeze(boxes),
             np.squeeze(classes).astype(np.int32),
             np.squeeze(scores),
+            np.squeeze(search(classes)),
             category_index,
             use_normalized_coordinates=True,
             line_thickness=8,

@@ -2,7 +2,7 @@ import requests
 import json
 
 def word(word) :
-	response = requests.get("https://fr.wikipedia.org/w/api.php?format=json&action=opensearch&search=" + word)
+	response = requests.get("https://en.wikipedia.org/w/api.php?format=json&action=opensearch&search=" + word)
 	suggestions = json.loads(response.content)
 	if (suggestions[0] != Null):
 		return suggestions[0]

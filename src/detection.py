@@ -7,7 +7,9 @@ from picamera import PiCamera
 import tensorflow as tf
 import argparse
 import sys
-from wiki import *
+
+# Minimum score
+min_score = 0.5
 
 # Camera resolution
 IM_WIDTH = 640
@@ -104,7 +106,6 @@ if camera_type == 'picamera':
             np.squeeze(boxes),
             np.squeeze(classes).astype(np.int32),
             np.squeeze(scores),
-            np.squeeze(search(classes)),
             category_index,
             use_normalized_coordinates=True,
             line_thickness=8,
@@ -118,6 +119,15 @@ if camera_type == 'picamera':
         t2 = cv2.getTickCount()
         time1 = (t2-t1)/freq
         frame_rate_calc = 1/time1
+
+        objects = []
+        for index, value in enumerate(classes[0]):
+            object_dict = {}
+            if scores[0, index] > min_score:
+            object_dict[(category_index.get(value)).get('name').encode('utf8')] = \
+            scores[0, index]
+            objects.append(object_dict)
+        print(str(objects))
 
         # Press 'q' to quit
         if cv2.waitKey(1) == ord('q'):

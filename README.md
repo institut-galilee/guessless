@@ -33,21 +33,31 @@ Plusieurs améliorations sont prévues pour notre table comme la reconnaissance 
 
 
 # Help ?
-## Où mettre les fichiers source ?
-Les fichiers sources sont à placer dans le répertoire `tensorflow/models/research/object_detection/`
+## Comment lancer l'application ?
+L'application, pour l'instant, se situe dans le répertoire `tensorflow/models/research/object_detection/`.
+
+# Aspet technique :
+## Reconnaissance d'objet : Tensorflow
+Tensorflow a été compilé depuis le code source a cause des problèmes renconré en l'installant avec la commande `sudo pip3 install tensorflow`.  
+
+## Interface graphique de l'application : PyQt5
+L'application qui permet de controller la table sera codé avec la librairie PyQt5 en Python.
+
 
 ## Composants :
 
 * Matrix LED RGB 64x32 Panel
 * Raspberry Pi Zero WH
 * Raspberry Pi Zero 3 B+
-* 2x Caméra Raspberry Pi
+* 1x Caméra Raspberry Pi
 * 2x Power supply (Raspberry & LED Panel)
 * Câbles & fils
 * Plaque Plexiglass
 * Balance
 * 2x Haut-Parleurs
+* Touchscreen display 7"
 
 ## Crédits :
-* http://blog.deconinck.info/post/2016/12/19/A-Dirt-Cheap-F-Awesome-Led-Table
-* https://www.youtube.com/watch?v=npZ-8Nj1YwY
+* http://blog.deconinck.info/post/2016/12/19/A-Dirt-Cheap-F-Awesome-Led-Table (L'origine de notre projet)
+* https://www.youtube.com/watch?v=npZ-8Nj1YwY (Mise en place de ProtoBuffer, OpenCV et Tensorflow sur un Raspberry)
+* https://github.com/EdjeElectronics (Compréhension de comment Tensorflow fonctionne)

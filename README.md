@@ -1,4 +1,4 @@
-# Guessless Project
+# **Guessless Project**
 
 ## Membres :
 * Maher LAAROUSSI (maher.laaroussi@gmail.com) [MaherLRS](https://github.com/maherlaaroussi "maherlaaroussi")
@@ -32,18 +32,20 @@ Pour l'instant, le projet est en cours de conception mais on vous tiendra au cou
 Plusieurs améliorations sont prévues pour notre table comme la reconnaissance vocale, la comparaison de deux aliments et l'apairage avec un smartphone.
 
 
-# Help ?
-## Comment lancer l'application ?
+## Help ?
+### Comment lancer l'application ?
 L'application, pour l'instant, se situe dans le répertoire `tensorflow/models/research/object_detection/`.
 
-# Aspet technique :
-## Reconnaissance d'objet : Tensorflow
+
+## Aspet technique :
+
+### Reconnaissance d'objet : Tensorflow
 Tensorflow a été compilé depuis le code source a cause des problèmes renconré en l'installant avec la commande `sudo pip3 install tensorflow`.  
 
-## Interface graphique de l'application : PyQt5
+### Interface graphique de l'application : PyQt5
 L'application qui permet de controller la table sera codé avec la librairie PyQt5 en Python.
 
-
+  
 ## Composants :
 
 * Matrix LED RGB 64x32 Panel

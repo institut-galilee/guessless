@@ -69,7 +69,7 @@ class application(QWidget):
         self.PATH_TO_LABELS = os.path.join(self.CWD_PATH, 'data', 'mscoco_label_map.pbtxt')
         self.NUM_CLASSES = 90
         self.label_map = label_map_util.load_labelmap(self.PATH_TO_LABELS)
-        self.categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=self.NUM_CLASSES, use_display_name=True)
+        self.categories = label_map_util.convert_label_map_to_categories(self.label_map, max_num_classes=self.NUM_CLASSES, use_display_name=True)
         self.category_index = label_map_util.create_category_index(self.categories)
         self.detection_graph = tf.Graph()
 

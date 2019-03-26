@@ -59,3 +59,4 @@ def detect():
     [detection_boxes, detection_scores, detection_classes, num_detections],
     feed_dict={image_tensor: image_expanded})
     print(str(classes[0][0]) + " : " + wiki.search(classes[0][0]))
+    return str(classes[0][0])

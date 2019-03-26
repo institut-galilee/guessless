@@ -47,17 +47,18 @@ class application(QWidget):
     def init_complete(self):
         self.titre_label.setText("Initialization complete !")
 
-    def init_tensorflow(self):
-        init_detection()
+def init_tensorflow():
+    init_detection()
 
 def main():
 
     # Initialization
     app = QApplication(sys.argv)
     window = application()
-    window.init_tensorflow()
-    window.init_complete()
     sys.exit(app.exec_())
+
+    init_tensorflow()
+    window.init_complete()
 
 
 if __name__ == '__main__':

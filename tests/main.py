@@ -18,7 +18,6 @@ class application(QWidget):
     def __init__(self):
         super(application, self).__init__()
         self.app_initialization()
-        self.detection_initialization()
 
     def app_initialization(self):
         self.setFixedSize(640, 480)
@@ -49,63 +48,7 @@ class application(QWidget):
         self.show()
 
     def guess(self):
-        self.detect()
-
-    def mousePressEvent(self, event):
-        if event.button() == Qt.RightButton:
-            print("Fuck you !")
-
-    def detection_initialization(self):
-        self.min_score = 0.5
-        self.IM_WIDTH = 640
-        self.IM_HEIGHT = 480
-
-        sys.path.append('..')
-        from utils import label_map_util
-        self.MODEL_NAME = 'ssdlite_mobilenet_v2_coco_2018_05_09'
-        self.CWD_PATH = os.getcwd()
-        self.PATH_TO_CKPT = os.path.join(self.CWD_PATH, self.MODEL_NAME, 'frozen_inference_graph.pb')
-        self.PATH_TO_LABELS = os.path.join(self.CWD_PATH, 'data', 'mscoco_label_map.pbtxt')
-        self.NUM_CLASSES = 90
-        self.label_map = label_map_util.load_labelmap(self.PATH_TO_LABELS)
-        self.categories = label_map_util.convert_label_map_to_categories(self.label_map, max_num_classes=NUM_CLASSES, use_display_name=True)
-        self.category_index = label_map_util.create_category_index(self.categories)
-        self.detection_graph = tf.Graph()
-
-        # Load Tensorflow into memory
-        with self.detection_graph.as_default():
-            self.od_graph_def = tf.GraphDef()
-            with tf.gfile.GFile(self.PATH_TO_CKPT, 'rb') as fid:
-                self.serialized_graph = fid.read()
-                self.od_graph_def.ParseFromString(self.serialized_graph)
-                tf.import_graph_def(self.od_graph_def, name='')
-            self.sess = tf.Session(graph=self.detection_graph)
-
-        # Ressources
-        self.image_tensor = self.detection_graph.get_tensor_by_name('image_tensor:0')
-        self.detection_boxes = self.detection_graph.get_tensor_by_name('detection_boxes:0')
-        self.detection_scores = self.detection_graph.get_tensor_by_name('detection_scores:0')
-        self.detection_classes = self.detection_graph.get_tensor_by_name('detection_classes:0')
-        self.num_detections = self.detection_graph.get_tensor_by_name('num_detections:0')
-
-    def detect(self):
-        # Capture image & expand it
-        self.camera = PiCamera()
-        self.camera.resolution = (self.IM_WIDTH, self.IM_HEIGHT)
-        self.camera.framerate = 10
-        self.camera.capture("image.png")
-        self.image = cv2.imread("image.png")
-        self.image_expanded = np.expand_dims(image, axis=0)
-
-        # Detection
-        (self.boxes, self.scores, self.classes, self.num) = sess.run(
-        [self.detection_boxes, self.detection_scores, self.detection_classes, self.num_detections],
-        feed_dict={self.image_tensor: self.image_expanded})
-        print(str(self.classes[0][0]) + " : " + wiki.search(self.classes[0][0]))
-
-    def close_all(self):
-        self.camera.close()
-        self.cv2.destroyAllWindows()
+        print("Detection !")
 
 
 def main():

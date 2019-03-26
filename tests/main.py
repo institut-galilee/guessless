@@ -106,7 +106,7 @@ class application(QWidget):
         # Detection
         (self.boxes, self.scores, self.classes, self.num) = sess.run(
         [self.detection_boxes, self.detection_scores, self.detection_classes, self.num_detections],
-        self.feed_dict={self.image_tensor: self.image_expanded})
+        feed_dict={self.image_tensor: self.image_expanded})
         print(str(self.classes[0][0]) + " : " + wiki.search(self.classes[0][0]))
         return str(self.classes[0][0])
 

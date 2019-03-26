@@ -7,7 +7,6 @@ from picamera import PiCamera
 import tensorflow as tf
 import argparse
 import sys
-import wiki
 
 def close_all(self):
     camera.close()

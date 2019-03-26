@@ -4,6 +4,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 import sys
+from detection import *
 
 class application(QWidget):
 
@@ -12,11 +13,12 @@ class application(QWidget):
         self.app_initialization()
 
     def app_initialization(self):
+        self.showFullScreen()
         self.setFixedSize(640, 480)
         self.move(300, 150)
         self.setWindowTitle("Guessless")
 
-        self.titre_label = QLabel("PyCamera")
+        self.titre_label = QLabel("Initialization ...")
         self.titre_label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.titre_label.setAlignment(Qt.AlignCenter)
         self.titre_label.setStyleSheet("QLabel {color: <hite;}")

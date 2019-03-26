@@ -12,7 +12,7 @@ def close_all(self):
     camera.close()
     cv2.destroyAllWindows()
 
-def detection_initialization(self):
+def init_detection(self):
     min_score = 0.5
     IM_WIDTH = 640
     IM_HEIGHT = 480

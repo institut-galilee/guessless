@@ -10,9 +10,11 @@ class application(QWidget):
 
     def __init__(self):
         super(application, self).__init__()
-        self.app_initialization()
+        self.init_app()
+        init_detection()
+        self.init_complete()
 
-    def app_initialization(self):
+    def init_app(self):
         self.showFullScreen()
         self.setFixedSize(640, 480)
         self.move(300, 150)
@@ -44,8 +46,8 @@ class application(QWidget):
     def guess(self):
         print("Detection !")
 
-    def quit():
-        return 1
+    def init_complete(self):
+        self.titre_label = QLabel("Initialization complete !")
 
 def main():
 

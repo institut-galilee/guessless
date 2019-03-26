@@ -8,11 +8,11 @@ import tensorflow as tf
 import argparse
 import sys
 
-def close_all(self):
+def close_all():
     camera.close()
     cv2.destroyAllWindows()
 
-def init_detection(self):
+def init_detection():
     min_score = 0.5
     IM_WIDTH = 640
     IM_HEIGHT = 480
@@ -45,7 +45,7 @@ def init_detection(self):
     detection_classes = detection_graph.get_tensor_by_name('detection_classes:0')
     num_detections = detection_graph.get_tensor_by_name('num_detections:0')
 
-def detect(self):
+def detect():
     # Capture image & expand it
     camera = PiCamera()
     camera.resolution = (IM_WIDTH, IM_HEIGHT)

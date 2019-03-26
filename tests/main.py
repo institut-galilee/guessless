@@ -51,7 +51,7 @@ class application(QWidget):
 
     def guess(self):
         print("Detection !")
-        print(slef.detect())
+        print(self.detect())
 
     def init_complete(self):
         self.titre_label.setText("Initialization complete !")

@@ -39,7 +39,7 @@ class application(QWidget):
 
         self.btn_layout.addWidget(self.guess_btn)
         self.btn_layout.addWidget(self.quit_btn)
-        self.layout.addLayout(self.btn_layout, 1, 0)
+        self.layout.addLayout(self.btn_layout, 0, 0)
         self.setLayout(self.layout)
         self.show()
 

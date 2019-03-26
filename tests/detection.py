@@ -7,35 +7,18 @@ from picamera import PiCamera
 import tensorflow as tf
 import argparse
 import sys
-from utils import label_map_util
-
-min_score = 0.5
-IM_WIDTH = 640
-IM_HEIGHT = 480
-NUM_CLASSES = 90
-
-MODEL_NAME = 'ssdlite_mobilenet_v2_coco_2018_05_09'
-PATH_TO_CKPT = ''
-PATH_TO_LABELS = ''
-label_map = ''
-categories = ''
-category_index = ''
-detection_graph = ''
-
-image_tensor = ''
-detection_boxes = ''
-detection_scores = ''
-detection_classes = ''
-num_detections = ''
-
-sess = ''
 
 def close_all():
     camera.close()
     cv2.destroyAllWindows()
 
 def init_detection():
+    min_score = 0.5
+    IM_WIDTH = 640
+    IM_HEIGHT = 480
+
     sys.path.append('..')
+    from utils import label_map_util
     MODEL_NAME = 'ssdlite_mobilenet_v2_coco_2018_05_09'
     CWD_PATH = os.getcwd()
     PATH_TO_CKPT = os.path.join(CWD_PATH, MODEL_NAME, 'frozen_inference_graph.pb')

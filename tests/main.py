@@ -51,7 +51,7 @@ class application(QWidget):
 
     def guess(self):
         print("Detection !")
-        print(detect())
+        print(slef.detect())
 
     def init_complete(self):
         self.titre_label.setText("Initialization complete !")
@@ -60,19 +60,17 @@ class application(QWidget):
         self.min_score = 0.5
         self.IM_WIDTH = 640
         self.IM_HEIGHT = 480
-        self.NUM_CLASSES = 90
-
-        from utils import label_map_util
 
         sys.path.append('..')
+        from utils import label_map_util
         self.MODEL_NAME = 'ssdlite_mobilenet_v2_coco_2018_05_09'
         self.CWD_PATH = os.getcwd()
-        self.PATH_TO_CKPT = os.path.join(CWD_PATH, MODEL_NAME, 'frozen_inference_graph.pb')
-        self.PATH_TO_LABELS = os.path.join(CWD_PATH, 'data', 'mscoco_label_map.pbtxt')
+        self.PATH_TO_CKPT = os.path.join(self.CWD_PATH, self.MODEL_NAME, 'frozen_inference_graph.pb')
+        self.PATH_TO_LABELS = os.path.join(self.CWD_PATH, 'data', 'mscoco_label_map.pbtxt')
         self.NUM_CLASSES = 90
-        self.label_map = label_map_util.load_labelmap(PATH_TO_LABELS)
-        self.categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=NUM_CLASSES, use_display_name=True)
-        self.category_index = label_map_util.create_category_index(categories)
+        self.label_map = label_map_util.load_labelmap(self.PATH_TO_LABELS)
+        self.categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=self.NUM_CLASSES, use_display_name=True)
+        self.category_index = label_map_util.create_category_index(self.categories)
         self.detection_graph = tf.Graph()
 
         # Load Tensorflow into memory
@@ -80,16 +78,21 @@ class application(QWidget):
             self.od_graph_def = tf.GraphDef()
             with tf.gfile.GFile(self.PATH_TO_CKPT, 'rb') as fid:
                 self.serialized_graph = fid.read()
-                self.od_graph_def.ParseFromString(serialized_graph)
-                tf.import_graph_def(od_graph_def, name='')
-            self.sess = tf.Session(graph=detection_graph)
+                self.od_graph_def.ParseFromString(self.serialized_graph)
+                tf.import_graph_def(self.od_graph_def, name='')
+            self.sess = tf.Session(graph=self.detection_graph)
 
         # Ressources
-        self.image_tensor = detection_graph.get_tensor_by_name('image_tensor:0')
-        self.detection_boxes = detection_graph.get_tensor_by_name('detection_boxes:0')
-        self.detection_scores = detection_graph.get_tensor_by_name('detection_scores:0')
-        self.detection_classes = detection_graph.get_tensor_by_name('detection_classes:0')
-        self.num_detections = detection_graph.get_tensor_by_name('num_detections:0')
+        self.image_tensor = self.detection_graph.get_tensor_by_name('image_tensor:0')
+        self.detection_boxes = self.detection_graph.get_tensor_by_name('detection_boxes:0')
+        self.detection_scores = self.detection_graph.get_tensor_by_name('detection_scores:0')
+        self.detection_classes = self.detection_graph.get_tensor_by_name('detection_classes:0')
+        self.num_detections = self.detection_graph.get_tensor_by_name('num_detections:0')
+
+    def close_all():
+        camera.close()
+        cv2.destroyAllWindows()
+
 
     def detect(self):
         # Capture image & expand it
@@ -103,8 +106,10 @@ class application(QWidget):
         # Detection
         (self.boxes, self.scores, self.classes, self.num) = sess.run(
         [self.detection_boxes, self.detection_scores, self.detection_classes, self.num_detections],
-        feed_dict={self.image_tensor: self.image_expanded})
-        print(str(classes[0][0]) + " : " + wiki.search(classes[0][0]))
+        self.feed_dict={self.image_tensor: self.image_expanded})
+        print(str(self.classes[0][0]) + " : " + wiki.search(self.classes[0][0]))
+        return str(self.classes[0][0])
+
 
 def main():
 

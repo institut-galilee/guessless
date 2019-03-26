@@ -4,14 +4,6 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 import sys
-import os
-import cv2
-import numpy as np
-from picamera.array import PiRGBArray
-from picamera import PiCamera
-import tensorflow as tf
-import argparse
-import wiki
 
 class application(QWidget):
 
@@ -33,7 +25,7 @@ class application(QWidget):
         self.guess_btn.clicked.connect(self.guess)
         self.guess_btn.resize(50, 30)
         self.quit_btn = QPushButton("Quit :(")
-        self.quit_btn.clicked.connect(self.app.quit())
+        self.quit_btn.clicked.connect(self.close)
 
         self.btn_layout = QHBoxLayout()
         self.layout = QGridLayout()
@@ -50,6 +42,8 @@ class application(QWidget):
     def guess(self):
         print("Detection !")
 
+    def quit():
+        return 1
 
 def main():
 

@@ -11,8 +11,6 @@ class application(QWidget):
     def __init__(self):
         super(application, self).__init__()
         self.init_app()
-        init_detection()
-        self.init_complete()
 
     def init_app(self):
         self.showFullScreen()
@@ -49,11 +47,16 @@ class application(QWidget):
     def init_complete(self):
         self.titre_label.setText("Initialization complete !")
 
+    def init_tensorflow():
+        init_detection()
+
 def main():
 
     # Initialization
     app = QApplication(sys.argv)
     window = application()
+    window.init_tensorflow()
+    window.init_complete()
     sys.exit(app.exec_())
 
 

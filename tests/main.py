@@ -11,7 +11,7 @@ class application(QWidget):
     def __init__(self):
         super(application, self).__init__()
         self.init_app()
-        self.init_detection()
+        self.init_tensorflow()
         self.init_complete()
 
     def init_app(self):

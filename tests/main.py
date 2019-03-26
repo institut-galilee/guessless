@@ -47,7 +47,7 @@ class application(QWidget):
         print("Detection !")
 
     def init_complete(self):
-        self.titre_label = QLabel("Initialization complete !")
+        self.titre_label.setText("Initialization complete !")
 
 def main():
 

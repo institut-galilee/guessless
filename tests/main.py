@@ -35,12 +35,12 @@ class application(QWidget):
         self.guess_btn.clicked.connect(self.guess)
         self.guess_btn.resize(50, 30)
         self.quit_btn = QPushButton("Quit :(")
-        self.quit_btn.clicked.connect(self.close)
+        self.quit_btn.clicked.connect(self.close_all_things)
 
         self.btn_layout = QHBoxLayout()
         self.layout = QGridLayout()
 
-        self.layout.addWidget(self.titre_label, 0, 0)
+        self.layout.addWidget(self.titre_label, 1, 0)
         self.titre_label.adjustSize()
 
         self.btn_layout.addWidget(self.guess_btn)
@@ -89,16 +89,21 @@ class application(QWidget):
         self.detection_classes = self.detection_graph.get_tensor_by_name('detection_classes:0')
         self.num_detections = self.detection_graph.get_tensor_by_name('num_detections:0')
 
+        self.camera = PiCamera()
+        self.camera.resolution = (self.IM_WIDTH, self.IM_HEIGHT)
+        self.camera.framerate = 10
+
     def close_all():
         camera.close()
         cv2.destroyAllWindows()
 
+    def close_all_thing(self):
+        self.close_all()
+        self.close()
+
 
     def detect(self):
         # Capture image & expand it
-        self.camera = PiCamera()
-        self.camera.resolution = (self.IM_WIDTH, self.IM_HEIGHT)
-        self.camera.framerate = 10
         self.camera.capture("image.png")
         self.image = cv2.imread("image.png")
         self.image_expanded = np.expand_dims(self.image, axis=0)
@@ -107,8 +112,7 @@ class application(QWidget):
         (self.boxes, self.scores, self.classes, self.num) = self.sess.run(
         [self.detection_boxes, self.detection_scores, self.detection_classes, self.num_detections],
         feed_dict={self.image_tensor: self.image_expanded})
-        print(str(self.classes[0][0]) + " : " + wiki.search(self.classes[0][0]))
-        return str(self.classes[0][0])
+        self.titre_label.setText(str(category_index.get(self.classes[0][0])).get('name')))
 
 
 def main():

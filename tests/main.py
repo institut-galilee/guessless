@@ -97,7 +97,7 @@ class application(QWidget):
         camera.close()
         cv2.destroyAllWindows()
 
-    def close_all_thing(self):
+    def close_all_things(self):
         self.close_all()
         self.close()
 
@@ -112,7 +112,9 @@ class application(QWidget):
         (self.boxes, self.scores, self.classes, self.num) = self.sess.run(
         [self.detection_boxes, self.detection_scores, self.detection_classes, self.num_detections],
         feed_dict={self.image_tensor: self.image_expanded})
-        self.titre_label.setText(str(category_index.get(self.classes[0][0])).get('name'))))
+
+        word = str(self.category_index.get(self.classes[0][0]).get('name'))
+        self.titre_label.setText(word + "\n" + wiki.search(word))
 
 
 def main():

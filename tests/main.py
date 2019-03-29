@@ -114,11 +114,15 @@ class application(QWidget):
         [self.detection_boxes, self.detection_scores, self.detection_classes, self.num_detections],
         feed_dict={self.image_tensor: self.image_expanded})
 
-        word = str(self.category_index.get(self.classes[0][0]).get('name'))
+        word = []
+
+        for c in classes[0]:
+            word.append(str(self.category_index.get(self.classes[0][0]).get('name')))
+
         #description = str(wiki.search(word))
 
         if (isinstance(word, str)):
-            self.titre_label.setText(word + "\n")
+            self.titre_label.setText(str(word))
         else:
             self.titre_label.setText("Aucun objet reconnu !")
 

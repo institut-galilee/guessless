@@ -115,8 +115,9 @@ class application(QWidget):
         feed_dict={self.image_tensor: self.image_expanded})
 
         word = str(self.category_index.get(self.classes[0][0]).get('name'))
+
         if (isinstance(word, str)):
-            self.titre_label.setText(word + "\n" + wiki.search(str(word))
+            self.titre_label.setText(word + "\n" + wiki.search(str(word)))
         else:
             self.titre_label.setText("Aucun objet reconnu !")
 

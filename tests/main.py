@@ -6,10 +6,8 @@ from PyQt5.QtCore import *
 import os
 import cv2
 import numpy as np
-from picamera.array import PiRGBArray
 from picamera import PiCamera
 import tensorflow as tf
-import argparse
 import sys
 import wiki
 
@@ -104,7 +102,7 @@ class application(QWidget):
 
 
     def detect(self):
-        # Capture image & expand it
+        # Capture an image & expand it
         self.camera.capture("image.png")
         self.image = cv2.imread("image.png")
         self.image_expanded = np.expand_dims(self.image, axis=0)
@@ -116,15 +114,13 @@ class application(QWidget):
 
         word = []
 
-        for c in classes[0]:
-            word.append(str(self.category_index.get(self.classes[0][0]).get('name')))
+        for cl in classes[0]:
+            word.append(str(self.category_index.get(cl[0]).get('name')))
 
         #description = str(wiki.search(word))
 
-        if (isinstance(word, str)):
-            self.titre_label.setText(str(word))
-        else:
-            self.titre_label.setText("Aucun objet reconnu !")
+        self.titre_label.setText(str(word[0]))
+        os.system('echo "' + word[0] + '" | festival --tts')
 
 
 def main():

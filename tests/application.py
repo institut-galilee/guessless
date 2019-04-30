@@ -112,7 +112,7 @@ class application(QWidget):
         [self.detection_boxes, self.detection_scores, self.detection_classes, self.num_detections],
         feed_dict={self.image_tensor: self.image_expanded})
 
-        word = self.category_index.get(self.classes[0][0]).get('name'))
+        word = self.category_index.get(self.classes[0][0]).get('name')
 
         #description = str(wiki.search(word))
 
@@ -122,7 +122,7 @@ class application(QWidget):
         objects = []
         for index, value in enumerate(self.classes[0]):
             object_dict = {}
-            if self.scores[0, index] > 0.5:
+            if self.scores[0, index] > 0:
                 object_dict[(self.category_index.get(value)).get('name')] = self.scores[0, index]
                 objects.append(object_dict)
         print objects

@@ -1,5 +1,6 @@
 import os
 import time
+from pygame import *
 
 
 def textToSound (message):
@@ -7,5 +8,13 @@ def textToSound (message):
 	time.sleep(1)
 
 def welcomeBro():
-	os.system('echo "' + 'Bienvenu Je suis Guessless' + '" | festival --tts')
+	os.system('echo "' + 'Wellcome i am guessless' + '" | festival --tts')
 	time.sleep(1)
+
+def start ():
+	mixer.init()
+	mixer.music.load("startSound.MP3")
+	mixer.music.play()
+	#sound_file=vlc.MediaPlayer("startSound.MP3")
+	#sound_file.play()
+	time.sleep(10)	

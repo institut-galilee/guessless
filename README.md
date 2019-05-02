@@ -45,7 +45,7 @@ Tensorflow a été compilé depuis le code source a cause des problèmes renconr
 ### Interface graphique de l'application : PyQt5
 L'application qui permet de controller la table sera codé avec la librairie PyQt5 en Python.
 
-  
+
 ## Composants :
 
 * Matrix LED RGB 64x32 Panel
@@ -63,3 +63,5 @@ L'application qui permet de controller la table sera codé avec la librairie PyQ
 * http://blog.deconinck.info/post/2016/12/19/A-Dirt-Cheap-F-Awesome-Led-Table (L'origine de notre projet)
 * https://www.youtube.com/watch?v=npZ-8Nj1YwY (Mise en place de ProtoBuffer, OpenCV et Tensorflow sur un Raspberry)
 * https://github.com/EdjeElectronics (Compréhension de comment Tensorflow fonctionne)
+* https://github.com/hzeller/rpi-rgb-led-matrix (Librairie pour la manipulation du panneau led)
+* https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md (Modèle utilisé pour la reconnaissance d'objet)

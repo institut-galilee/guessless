@@ -18,7 +18,7 @@ def start ():
 	mixer.music.play()
 	#sound_file=vlc.MediaPlayer("startSound.MP3")
 	#sound_file.play()
-	time.sleep(8)
+	time.sleep(10)
 #Fonction de son de pulsation lors de la detection de l'objet
 def pulsation ():
 	mixer.init()
@@ -26,9 +26,9 @@ def pulsation ():
 	mixer.music.play()
 	#sound_file=vlc.MediaPlayer("startSound.MP3")
 	#sound_file.play()
-	time.sleep(4)
+	time.sleep(5)
 #Fonction de son de quit
-def Quit ():
+def bye ():
 	mixer.init()
 	mixer.music.load("quitSound.mp3")
 	mixer.music.play()

@@ -249,7 +249,6 @@ class Application(QWidget):
         self.worker.widgets.connect(self.actionWidgets)
         self.worker.action.connect(self.action)
         self.worker.sound.connect(self.read_description)
-        self.worker.sound_action.connect(self.sound_action)
 
         self.workerSound = Sound()
         self.workerSound.moveToThread(self.thread2)

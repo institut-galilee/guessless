@@ -26,7 +26,7 @@ def pulsation ():
 	mixer.music.play()
 	#sound_file=vlc.MediaPlayer("startSound.MP3")
 	#sound_file.play()
-	time.sleep(10)
+	time.sleep(5)
 #Fonction de son de quit
 def Quit ():
 	mixer.init()

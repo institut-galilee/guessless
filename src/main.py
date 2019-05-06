@@ -34,6 +34,7 @@ class Detection(QObject):
     loading = pyqtSignal(int)
     widgets = pyqtSignal(str)
     action = pyqtSignal(str)
+    sound = pyqtSignal(str)
 
     camera = None
     IM_WIDTH = 640

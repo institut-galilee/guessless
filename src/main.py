@@ -106,9 +106,9 @@ class Detection(QObject):
 
         word = [None, None]
         top = 0
-        for value in enumerate(objects):
-            if value[1] > top:
-                word = value
+        for i in range(len(objects)):
+            if objects[i][1] > top:
+                word = objects[i]
 
         if (word[0] != None):
             sound.textToSound(word[0])
@@ -302,6 +302,8 @@ class Application(QWidget):
             message = "I'm happy to help you :) !"
         if (rand == 4):
             message = "1, 2, 3, I'm guessing, 4, 5, 6, I'm still guessing !"
+        if (rand == 5):
+            message = "Don't tell me ... I will find it myself !"
         return message
 
     def loading(self, mode):

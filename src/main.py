@@ -106,9 +106,9 @@ class Detection(QObject):
 
         word = [None, None]
         top = 0
-        for index, value in enumerate(objects):
-            if value > top:
-                word = [index, value]
+        for value in enumerate(objects):
+            if value[1] > top:
+                word = value
 
         if (word[0] != None):
             sound.textToSound(word[0])

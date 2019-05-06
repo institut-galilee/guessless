@@ -123,8 +123,8 @@ class Detection(QObject):
             self.action.emit("guess_complete")
             sound.textToSound(word[0])
         else:
-            sound.textToSound("Nothing")
             self.action.emit("guess_nothing")
+            sound.textToSound("Nothing")
 
     def close_all(self):
         """
@@ -135,6 +135,8 @@ class Detection(QObject):
 
 
 class Application(QWidget):
+
+    stop = False
 
     def __init__(self):
         super(Application, self).__init__()
@@ -257,7 +259,7 @@ class Application(QWidget):
 
         if (action == "guess"):
             self.bt_sound.hide()
-            self.bt_quit.setText("Stop")
+            self.bt_quit.hide()
             self.titre_label.setText("Recognising ...")
             self.titre_label.show()
             self.score_label.setText(self.thinking())
@@ -343,8 +345,7 @@ class Application(QWidget):
         bt_text = self.bt_quit.text()
         if (bt_text == "Shutdown"):
             self.close_all_things()
-        elif (bt_text == "Stop"):
-            print("Stop")
+            os.system("shutdown now -h")
 
 def main():
     app = QApplication(sys.argv)

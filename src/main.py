@@ -140,8 +140,7 @@ class Application(QWidget):
 
     def init_app(self):
         # Main window
-        #self.showFullScreen()
-        self.setFixedSize(600, 800)
+        self.showFullScreen()
         self.setWindowTitle("Guessless")
         self.setStyleSheet("background-color: black;")
 

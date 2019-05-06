@@ -8,6 +8,7 @@ import sys
 import os
 import wiki
 import sound
+import led
 import random
 import cv2
 import numpy as np
@@ -22,6 +23,9 @@ class Master(QObject):
     sound_start = pyqtSignal()
     sound_guess = pyqtSignal()
     sound_bye = pyqtSignal()
+    led_start = pyqtSignal()
+    led_guess = pyqtSignal()
+    led_bye = pyqtSignal()
 
     def __init__(self):
         super().__init__()
@@ -151,6 +155,20 @@ class Sound(QObject):
     def bye(self):
         sound.bye()
 
+class Led(QObject):
+
+    def __init__(self):
+        super().__init__()
+
+    def start(self):
+        led.start()
+
+    def guess(self):
+        led.guess()
+
+    def bye(self):
+        led.bye()
+
 class Application(QWidget):
 
     stop = False
@@ -160,7 +178,7 @@ class Application(QWidget):
         self.init_app()
         self.init_detection()
         self.master.sound_start.emit()
-        os.system("cd /home/pi/Documents/rpi-rgb-led-matrix/utils/ && sudo ./video-viewer videoLogo.webm --led-rows=32 --led-cols=64 --led-no-hardware-pulse")
+        self.master.led_start.emit()
 
     def init_app(self):
         # Main window
@@ -235,9 +253,10 @@ class Application(QWidget):
         # Create Thread, Master and Worker
         self.thread = QThread()
         self.thread.start()
-
         self.thread2 = QThread()
         self.thread2.start()
+        self.thread3 = QThread()
+        self.thread3.start()
 
         self.worker = Detection()
         self.worker.moveToThread(self.thread)
@@ -254,12 +273,18 @@ class Application(QWidget):
         self.workerSound = Sound()
         self.workerSound.moveToThread(self.thread2)
 
+        self.workerLed = Led()
+        self.workerLed.moveToThread(self.thread3)
+
         self.master = Master()
         self.master.initialization.connect(self.worker.init_detection)
         self.master.detection.connect(self.worker.detect)
         self.master.sound_start.connect(self.workerSound.start)
         self.master.sound_guess.connect(self.workerSound.guess)
         self.master.sound_bye.connect(self.workerSound.bye)
+        self.master.led_start.connect(self.workerLed.start)
+        self.master.led_guess.connect(self.workerLed.guess)
+        self.master.led_bye.connect(self.workerLed.bye)
 
         # Tensorflow's initialization
         self.master.initialization.emit()

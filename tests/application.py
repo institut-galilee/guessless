@@ -41,6 +41,7 @@ class Detection(QObject):
     detection_scores = None
     detection_classes = None
     num_detections = None
+    sess = None
 
     def __init__(self):
         super().__init__()
@@ -66,7 +67,7 @@ class Detection(QObject):
                 serialized_graph = fid.read()
                 od_graph_def.ParseFromString(serialized_graph)
                 tf.import_graph_def(od_graph_def, name='')
-            sess = tf.Session(graph=detection_graph)
+            self.sess = tf.Session(graph=detection_graph)
 
         # Ressources
         self.image_tensor = detection_graph.get_tensor_by_name('image_tensor:0')
@@ -97,8 +98,8 @@ class Detection(QObject):
         objects = []
         for index, value in enumerate(classes[0]):
             object_dict = {}
-            if self.scores[0, index] > 0.2:
-                object_dict[(self.category_index.get(value)).get('name')] = self.scores[0, index]
+            if scores[0, index] > 0.2:
+                object_dict[(category_index.get(value)).get('name')] = scores[0, index]
                 objects.append(object_dict)
 
         word = [None, None]
@@ -136,8 +137,7 @@ class Application(QWidget):
 
     def init_app(self):
         # Main window
-        #self.showFullScreen()
-        self.setFixedSize(600, 800)
+        self.showFullScreen()
         self.setWindowTitle("Guessless")
         self.setStyleSheet("background-color: black;")
 

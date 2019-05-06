@@ -116,7 +116,7 @@ class Detection(QObject):
         if (word[0] != None):
             desc = wiki.search(str(word[0]))
             splited = desc.split(".");
-            self.description.emit(splited[0])
+            self.description.emit(splited[0] + ".")
             self.title.emit(word[0].capitalize())
             self.score.emit(str(int(word[1] * 100)))
             self.guess.emit(True)

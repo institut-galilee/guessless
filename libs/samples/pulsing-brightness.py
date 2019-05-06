@@ -10,14 +10,21 @@ class GrayscaleBlock(SampleBase):
         max_brightness = self.matrix.brightness
         count = 0
 
-        self.matrix.Fill(255, 255, 255)
-
-        while (300):
+        while (50):
             if self.matrix.brightness < 1:
                 self.matrix.brightness = max_brightness
                 count += 1
             else:
                 self.matrix.brightness -= 1
+
+            if count % 4 == 0:
+                self.matrix.Fill(255, 255, 255)
+            elif count % 4 == 1:
+                self.matrix.Fill(255, 255, 255)
+            elif count % 4 == 2:
+                self.matrix.Fill(255, 255, 255)
+            elif count % 4 == 3:
+                self.matrix.Fill(255, 255, 255)
 
             self.usleep(20 * 1000)
 

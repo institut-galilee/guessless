@@ -138,26 +138,26 @@ class Detection(QObject):
 
 class Sound(QObject):
 
-def __init__(self):
-    super().__init__()
+    def __init__(self):
+        super().__init__()
 
-def stop(self):
-    self.stop = True
+    def stop(self):
+        self.stop = True
 
-sef launch(self):
-    self.stop = False
+    sef launch(self):
+        self.stop = False
 
-def start(self):
-    while (self.stop != True):
-        sound.start()
+    def start(self):
+        while (self.stop != True):
+            sound.start()
 
-def guess(self):
-    while (self.stop != True):
-        sound.pulsation
+    def guess(self):
+        while (self.stop != True):
+            sound.pulsation
 
-def bye(self):
-    while (self.stop != True):
-        sound.bye()
+    def bye(self):
+        while (self.stop != True):
+            sound.bye()
 
 class Application(QWidget):
 

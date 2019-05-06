@@ -311,6 +311,7 @@ class Application(QWidget):
         elif (mode == 2):
             self.movie = QMovie("loading2.gif")
 
+        self.movie.setScaledSize(QSize(400, 400))
         self.description_label.setMovie(self.movie)
         self.movie.start()
 

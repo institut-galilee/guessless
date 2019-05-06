@@ -1,6 +1,6 @@
 import os
-import time
 from pygame import *
+import time
 
 #fonction pour transformer le text on son ce qu'on va utiliser pour anoncer
 #le nom de l'objet
@@ -27,11 +27,11 @@ def pulsation ():
 	#sound_file=vlc.MediaPlayer("startSound.MP3")
 	#sound_file.play()
 	time.sleep(10)
-#Fonction de son de quit 
+#Fonction de son de quit
 def Quit ():
 	mixer.init()
 	mixer.music.load("quitSound.mp3")
 	mixer.music.play()
 	#sound_file=vlc.MediaPlayer("startSound.MP3")
 	#sound_file.play()
-	time.sleep(10)	
+	time.sleep(10)

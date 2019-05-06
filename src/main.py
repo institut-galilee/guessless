@@ -161,12 +161,15 @@ class Led(QObject):
         super().__init__()
 
     def start(self):
+        time.sleep(1)
         led.start()
 
     def guess(self):
+        time.sleep(1)
         led.guess()
 
     def bye(self):
+        time.sleep(1)
         led.bye()
 
 class Application(QWidget):

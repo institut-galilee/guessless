@@ -10,7 +10,7 @@ class GrayscaleBlock(SampleBase):
         max_brightness = self.matrix.brightness
         count = 0
 
-        while (50):
+        for i in range (400):
             if self.matrix.brightness < 1:
                 self.matrix.brightness = max_brightness
                 count += 1

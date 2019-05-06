@@ -160,7 +160,7 @@ class Application(QWidget):
         self.init_app()
         self.init_detection()
         self.master.sound_start.emit()
-        os.system("sudo ./video-viewer videoLogo.webm --led-rows=32 --led-cols=64 --led-no-hardware-pulse")
+        os.system("cd /home/pi/Documents/rpi-rgb-led-matrix/utils/ && sudo ./video-viewer videoLogo.webm --led-rows=32 --led-cols=64 --led-no-hardware-pulse")
 
     def init_app(self):
         # Main window

@@ -7,15 +7,14 @@ import time
 import sys
 import os
 import wiki
+import sound
 import random
-"""
 import cv2
 import numpy as np
 from picamera.array import PiRGBArray
 from picamera import PiCamera
 import tensorflow as tf
 import argparse
-"""
 
 class Master(QObject):
     initialization = pyqtSignal()
@@ -32,6 +31,7 @@ class Detection(QObject):
     loading = pyqtSignal(int)
     widgets = pyqtSignal(str)
     action = pyqtSignal(str)
+    sound = pyqtSignal()
 
     camera = None
     IM_WIDTH = 640
@@ -47,7 +47,6 @@ class Detection(QObject):
 
     def init_detection(self):
         self.action.emit("initialization")
-        """
         sys.path.append('..')
         from utils import label_map_util
         MODEL_NAME = 'ssdlite_mobilenet_v2_coco_2018_05_09'
@@ -79,17 +78,12 @@ class Detection(QObject):
         self.camera = PiCamera()
         self.camera.resolution = (self.IM_WIDTH, self.IM_HEIGHT)
         self.camera.framerate = 10
-        """
 
-        for i in range(5):
-            print("Init ! " + str(i))
-            time.sleep(1)
-
-        self.action.emit("initComplete")
+        self.action.emit("init_complete")
 
     def detect(self):
         self.action.emit("guess")
-        """
+
         # Capture an image & expand it
         self.camera.capture("image.png")
         self.image = cv2.imread("image.png")
@@ -103,24 +97,27 @@ class Detection(QObject):
         objects = []
         for index, value in enumerate(classes[0]):
             object_dict = {}
-            if self.scores[0, index] > 0:
+            if self.scores[0, index] > 0.2:
                 object_dict[(self.category_index.get(value)).get('name')] = self.scores[0, index]
                 objects.append(object_dict)
 
-        #os.system('echo "' + word + '" | festival --tts')
-        print(objects)
-        """
-        for i in range(5):
-            print("Detectetion powa ! " + str(i))
-            time.sleep(1)
+        word = [None, None]
+        top = 0
+        for index, value in enumerate(objects):
+            if value > top:
+                word = [index, value]
 
-        word = "Smartphone"
-
-        self.description.emit(wiki.search(word))
-        self.title.emit(word)
-        self.score.emit("50")
-        self.guess.emit(True)
-        self.widgets.emit("show")
+        if (word[0] != None):
+            sound.textToSound(word[0])
+            self.description.emit(wiki.search(word[0]))
+            self.title.emit(word[0])
+            self.score.emit(str(word[1]))
+            self.guess.emit(True)
+            self.widgets.emit("show")
+            self.action.emit("guess_complete")
+        else:
+            sound.textToSound("Nothing")
+            self.action.emit("guess_nothing")
 
     def close_all(self):
         """
@@ -160,32 +157,48 @@ class Application(QWidget):
         self.description_label.setAlignment(Qt.AlignCenter)
         self.description_label.setStyleSheet("QLabel {color: white; font-family: Carlito; font-size: 14px}")
 
+        self.bt_sound = QPushButton()
+        self.bt_sound.setStyleSheet("background-color: white; font-size: 18px; font-style: bold; color: black")
+        self.bt_sound.setFixedSize(40, 40)
+        self.bt_sound.setIcon(QIcon('speaker.png'))
+        self.bt_sound.setIconSize(QSize(24,24))
+        self.bt_sound.clicked.connect(self.read_description)
+
         self.horizontalGroupBox = QGroupBox()
         self.layout = QHBoxLayout()
 
         self.vGroupBox = QGroupBox()
+        self.soundGroupBox = QGroupBox()
+
         self.layout2 = QVBoxLayout()
+        self.layout3 = QHBoxLayout()
+
         self.layout2.addWidget(self.titre_label)
         self.layout2.addWidget(self.score_label)
         self.layout2.addWidget(self.description_label, 1)
+        self.layout3.addStretch(3)
+        self.layout3.addWidget(self.bt_sound)
+        self.bt_sound.hide()
 
         self.bt_guess = QPushButton("Guess !")
         self.bt_guess.setStyleSheet("background-color: indigo; font-size: 24px; font-style: bold; font-family: Carlito")
         self.bt_guess.setFixedHeight(60)
         self.bt_guess.clicked.connect(self.guess)
-        self.layout.addWidget(self.bt_guess, 3)
+        self.layout.addWidget(self.bt_guess, 2)
 
-        self.bt_quit = QPushButton("Quit")
-        self.bt_quit.setStyleSheet("background-color: white; font-size: 18px; font-style: bold; color: black")
+        self.bt_quit = QPushButton("Shutdown")
+        self.bt_quit.setStyleSheet("background-color: white; font-size: 16px; font-style: bold; color: black")
         self.bt_quit.setFixedHeight(60)
-        self.bt_quit.clicked.connect(self.close_all_things)
+        self.bt_quit.clicked.connect(self.bye)
         self.layout.addWidget(self.bt_quit)
 
         self.horizontalGroupBox.setLayout(self.layout)
         self.vGroupBox.setLayout(self.layout2)
+        self.soundGroupBox.setLayout(self.layout3)
 
         self.mainLayout = QVBoxLayout()
         self.mainLayout.addWidget(self.vGroupBox)
+        self.mainLayout.addWidget(self.soundGroupBox)
         self.mainLayout.addWidget(self.horizontalGroupBox)
         self.setLayout(self.mainLayout)
 
@@ -206,6 +219,7 @@ class Application(QWidget):
         self.worker.loading.connect(self.loading)
         self.worker.widgets.connect(self.actionWidgets)
         self.worker.action.connect(self.action)
+        self.worker.sound.connect(self.read_description)
 
         self.master = Master()
         self.master.initialization.connect(self.worker.init_detection)
@@ -221,6 +235,7 @@ class Application(QWidget):
             self.titre_label.show()
             self.description_label.show()
             self.score_label.show()
+            self.bt_sound.show()
         elif (action == "hide"):
             self.bt_guess.hide()
             self.bt_quit.hide()
@@ -228,10 +243,15 @@ class Application(QWidget):
             self.description_label.hide()
             self.score_label.hide()
 
+    def read_description(self):
+        sound.textToSound(self.description_label.text())
+
     def action(self, action):
         self.actionWidgets("hide")
 
         if (action == "guess"):
+            self.bt_sound.hide()
+            self.bt_quit.setText("Stop")
             self.titre_label.setText("Recognising ...")
             self.titre_label.show()
             self.score_label.setText(self.thinking())
@@ -240,18 +260,31 @@ class Application(QWidget):
             self.description_label.show()
             self.bt_quit.show()
 
+        if (action == "guess_complete"):
+            self.actionWidgets("show")
+            self.bt_quit.setText("Shutdown")
+
         elif (action == "initialization"):
             self.titre_label.setText("Initialization ...")
             self.titre_label.show()
             self.loading(2)
             self.description_label.show()
 
-        elif (action == "initComplete"):
+        elif (action == "init_complete"):
             self.actionWidgets("show")
             self.score_label.hide()
+            self.bt_sound.hide()
             self.bt_guess.setEnabled(True)
             self.description_label.setText("Please push the button GUESS and magic will happen :)")
             self.titre_label.setText("Ready !")
+
+        elif (action == "guess_nothing"):
+            self.actionWidgets("show")
+            self.score_label.hide()
+            self.bt_sound.hide()
+            self.description_label.setText("Try with other objects !")
+            self.titre_label.setText("Nothing")
+            self.updateGuess(True)
 
     def changeTitle(self, text):
         self.titre_label.setText(text)
@@ -296,6 +329,13 @@ class Application(QWidget):
         self.close()
         self.thread.quit()
         self.thread.wait(1)
+
+    def bye(self):
+        bt_text = self.bt_quit.text()
+        if (bt_text == "Shutdown"):
+            self.close_all_things()
+        elif (bt_text == "Stop"):
+            print("Stop")
 
 def main():
     app = QApplication(sys.argv)

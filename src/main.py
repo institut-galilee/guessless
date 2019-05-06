@@ -100,8 +100,7 @@ class Detection(QObject):
         for index, value in enumerate(classes[0]):
             object_dict = {}
             if scores[0, index] > 0.2:
-                object_dict[(self.category_index.get(value)).get('name')] = scores[0, index]
-                objects.append(object_dict)
+                objects.append([(self.category_index.get(value)).get('name'), scores[0, index]])
 
         print(objects)
 
@@ -259,7 +258,7 @@ class Application(QWidget):
             self.titre_label.show()
             self.score_label.setText(self.thinking())
             self.score_label.show()
-            #self.loading(1)
+            self.loading(1)
             self.description_label.show()
             self.bt_quit.show()
 

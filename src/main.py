@@ -42,6 +42,7 @@ class Detection(QObject):
     detection_classes = None
     num_detections = None
     sess = None
+    category_index = None
 
     def __init__(self):
         super().__init__()
@@ -57,7 +58,7 @@ class Detection(QObject):
         NUM_CLASSES = 90
         label_map = label_map_util.load_labelmap(PATH_TO_LABELS)
         categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=NUM_CLASSES, use_display_name=True)
-        category_index = label_map_util.create_category_index(categories)
+        self.category_index = label_map_util.create_category_index(categories)
         detection_graph = tf.Graph()
 
         # Load Tensorflow into memory
@@ -99,8 +100,10 @@ class Detection(QObject):
         for index, value in enumerate(classes[0]):
             object_dict = {}
             if scores[0, index] > 0.2:
-                object_dict[(category_index.get(value)).get('name')] = scores[0, index]
+                object_dict[(self.category_index.get(value)).get('name')] = scores[0, index]
                 objects.append(object_dict)
+
+        print(objects)
 
         word = [None, None]
         top = 0

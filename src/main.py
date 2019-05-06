@@ -259,7 +259,7 @@ class Application(QWidget):
             self.titre_label.show()
             self.score_label.setText(self.thinking())
             self.score_label.show()
-            self.loading(1)
+            #self.loading(1)
             self.description_label.show()
             self.bt_quit.show()
 

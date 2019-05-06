@@ -144,7 +144,7 @@ class Sound(QObject):
     def stop(self):
         self.stop = True
 
-    sef launch(self):
+    self.launch(self):
         self.stop = False
 
     def start(self):

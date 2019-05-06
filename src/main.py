@@ -113,13 +113,15 @@ class Detection(QObject):
         print(word[0])
 
         if (word[0] != None):
-            sound.textToSound(word[0])
-            self.description.emit(wiki.search(str(word[0])))
+            desc = wiki.search(str(word[0]))
+            String[] splited = str.split(".");
+            self.description.emit(splited[0])
             self.title.emit(word[0].capitalize())
             self.score.emit(str(int(word[1] * 100)))
             self.guess.emit(True)
             self.widgets.emit("show")
             self.action.emit("guess_complete")
+            sound.textToSound(word[0])
         else:
             sound.textToSound("Nothing")
             self.action.emit("guess_nothing")

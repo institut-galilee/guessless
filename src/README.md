@@ -5,8 +5,11 @@
 ### wiki.py :
 Pour la récupération de la description d'un objet en utilisant wikipedia.
 
-### detection.py :
-Tout ce qui permet d'initialiser Tensorflow, de le manipuler et de lancer une detection avec le modèle `COCO`.
+### sound.py :
+Tout ce qui permet la manipulation du son.
+
+### led.py :
+Pour la manipulation du panneau led.
 
 ### main.py :
 Le programme principal qui permet l'initialisation de l'Interface graphique avec PyQt5.

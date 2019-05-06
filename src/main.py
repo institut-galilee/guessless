@@ -110,6 +110,8 @@ class Detection(QObject):
             if objects[i][1] > top:
                 word = objects[i]
 
+        print(word[0])
+
         if (word[0] != None):
             sound.textToSound(word[0])
             self.description.emit(wiki.search(str(word[0])))

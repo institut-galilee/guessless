@@ -85,6 +85,7 @@ class Detection(QObject):
 
     def detect(self):
         self.action.emit("guess")
+        sound.pulsation()
 
         # Capture an image & expand it
         self.camera.capture("image.png")
@@ -142,6 +143,7 @@ class Application(QWidget):
         super(Application, self).__init__()
         self.init_app()
         self.init_detection()
+        sound.start()
 
     def init_app(self):
         # Main window
@@ -345,6 +347,7 @@ class Application(QWidget):
         bt_text = self.bt_quit.text()
         if (bt_text == "Shutdown"):
             self.close_all_things()
+            sound.Quit()
             os.system("shutdown now -h")
 
 def main():

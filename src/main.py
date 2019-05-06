@@ -54,7 +54,7 @@ class Detection(QObject):
         super().__init__()
 
     def init_detection(self):
-        self.sound_action("start")
+        self.sound_action.emit("start")
         self.action.emit("initialization")
         sys.path.append('..')
         from utils import label_map_util

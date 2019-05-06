@@ -146,6 +146,8 @@ class Detection(QObject):
 
 class Sound(QObject):
 
+    stop = False
+
     def __init__(self):
         super().__init__()
 
@@ -161,7 +163,7 @@ class Sound(QObject):
 
     def guess(self):
         while (self.stop != True):
-            sound.pulsation
+            sound.pulsation()
 
     def bye(self):
         while (self.stop != True):

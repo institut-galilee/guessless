@@ -19,6 +19,9 @@ import argparse
 class Master(QObject):
     initialization = pyqtSignal()
     detection = pyqtSignal()
+    sound_start = pyqtSignal()
+    sound_guess = pyqtSignal()
+    sound_bye = pyqtSignal()
 
     def __init__(self):
         super().__init__()
@@ -31,7 +34,6 @@ class Detection(QObject):
     loading = pyqtSignal(int)
     widgets = pyqtSignal(str)
     action = pyqtSignal(str)
-    sound = pyqtSignal()
 
     camera = None
     IM_WIDTH = 640
@@ -134,6 +136,28 @@ class Detection(QObject):
         """
         print("See you later !")
 
+class Sound(QObject):
+
+def __init__(self):
+    super().__init__()
+
+def stop(self):
+    self.stop = True
+
+sef launch(self):
+    self.stop = False
+
+def start(self):
+    while (self.stop != True):
+        sound.start()
+
+def guess(self):
+    while (self.stop != True):
+        sound.pulsation
+
+def bye(self):
+    while (self.stop != True):
+        sound.bye()
 
 class Application(QWidget):
 
@@ -143,7 +167,7 @@ class Application(QWidget):
         super(Application, self).__init__()
         self.init_app()
         self.init_detection()
-        sound.start()
+        self.master.sound_start.emit()
 
     def init_app(self):
         # Main window
@@ -219,6 +243,9 @@ class Application(QWidget):
         self.thread = QThread()
         self.thread.start()
 
+        self.thread2 = QThread()
+        self.thread2.start()
+
         self.worker = Detection()
         self.worker.moveToThread(self.thread)
 
@@ -231,9 +258,15 @@ class Application(QWidget):
         self.worker.action.connect(self.action)
         self.worker.sound.connect(self.read_description)
 
+        self.workerSound = Sound()
+        self.workerSound.moveToThread(self.thread2)
+
         self.master = Master()
         self.master.initialization.connect(self.worker.init_detection)
         self.master.detection.connect(self.worker.detect)
+        self.master.sound_start.connect(self.workerSound.start)
+        self.master.sound_guess.connect(self.workerSound.guess)
+        self.master.sound_bye.connect(self.workerSound.bye)
 
         # Tensorflow's initialization
         self.master.initialization.emit()

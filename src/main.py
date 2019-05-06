@@ -22,6 +22,8 @@ class Master(QObject):
     sound_start = pyqtSignal()
     sound_guess = pyqtSignal()
     sound_bye = pyqtSignal()
+    sound_stop = pyqtSignal()
+    sound_begin = pyqtSignal()
 
     def __init__(self):
         super().__init__()
@@ -35,6 +37,7 @@ class Detection(QObject):
     widgets = pyqtSignal(str)
     action = pyqtSignal(str)
     sound = pyqtSignal(str)
+    sound_action = pyqtSignal(str)
 
     camera = None
     IM_WIDTH = 640
@@ -51,6 +54,7 @@ class Detection(QObject):
         super().__init__()
 
     def init_detection(self):
+        self.sound_action("start")
         self.action.emit("initialization")
         sys.path.append('..')
         from utils import label_map_util
@@ -85,10 +89,11 @@ class Detection(QObject):
         self.camera.framerate = 10
 
         self.action.emit("init_complete")
+        self.sound_action("stop")
 
     def detect(self):
         self.action.emit("guess")
-        sound.pulsation()
+        self.sound_action("start")
 
         # Capture an image & expand it
         self.camera.capture("image.png")
@@ -129,6 +134,8 @@ class Detection(QObject):
         else:
             self.action.emit("guess_nothing")
             sound.textToSound("Nothing")
+
+        self.sound_action("stop")
 
     def close_all(self):
         """
@@ -258,6 +265,7 @@ class Application(QWidget):
         self.worker.widgets.connect(self.actionWidgets)
         self.worker.action.connect(self.action)
         self.worker.sound.connect(self.read_description)
+        self.worker.sound_action.connect(self.sound_action)
 
         self.workerSound = Sound()
         self.workerSound.moveToThread(self.thread2)
@@ -268,6 +276,8 @@ class Application(QWidget):
         self.master.sound_start.connect(self.workerSound.start)
         self.master.sound_guess.connect(self.workerSound.guess)
         self.master.sound_bye.connect(self.workerSound.bye)
+        self.master.sound_stop.connect(self.workerSound.stop)
+        self.master.sound_begin.connect(self.workerSound.launch)
 
         # Tensorflow's initialization
         self.master.initialization.emit()
@@ -333,9 +343,15 @@ class Application(QWidget):
     def changeTitle(self, text):
         self.titre_label.setText(text)
 
+    def sound_action(self, action):
+        if (action == "start"):
+            self.master.sound_begin.emit()
+        elif (action == "stop"):
+            self.master.sound_stop.emit()
+
     def thinking(self):
         message = "I'm thinking, give me some space !"
-        rand = random.randint(0, 4)
+        rand = random.randint(0, 5)
         if (rand == 1):
             message = "I'm guessing, it's almost done !"
         if (rand == 2):
@@ -370,6 +386,7 @@ class Application(QWidget):
     def guess(self):
         print("Detection !")
         self.master.detection.emit()
+        self.master.sound_guess.emit()
 
     def close_all_things(self):
         self.worker.close_all()

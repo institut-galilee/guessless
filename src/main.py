@@ -160,6 +160,7 @@ class Application(QWidget):
         self.init_app()
         self.init_detection()
         self.master.sound_start.emit()
+        os.system("sudo ./video-viewer videoLogo.webm --led-rows=32 --led-cols=64 --led-no-hardware-pulse")
 
     def init_app(self):
         # Main window
@@ -373,6 +374,7 @@ class Application(QWidget):
         if (bt_text == "Shutdown"):
             self.close_all_things()
             self.master.sound_bye.emit()
+            time.sleep(5)
             os.system("shutdown now -h")
 
 def main():

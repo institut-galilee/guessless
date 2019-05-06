@@ -112,7 +112,7 @@ class Detection(QObject):
 
         if (word[0] != None):
             sound.textToSound(word[0])
-            self.description.emit(wiki.search(word[0]))
+            self.description.emit(wiki.search(str(word[0])))
             self.title.emit(word[0])
             self.score.emit(str(word[1]))
             self.guess.emit(True)

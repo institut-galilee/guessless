@@ -387,6 +387,7 @@ class Application(QWidget):
     def guess(self):
         self.master.sound_guess.emit()
         self.master.detection.emit()
+        self.master.led_guess.emit()
 
     def close_all_things(self):
         self.worker.close_all()

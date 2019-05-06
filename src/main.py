@@ -89,11 +89,11 @@ class Detection(QObject):
         self.camera.framerate = 10
 
         self.action.emit("init_complete")
-        self.sound_action("stop")
+        self.sound_action.emit("stop")
 
     def detect(self):
         self.action.emit("guess")
-        self.sound_action("start")
+        self.sound_action.emit("start")
 
         # Capture an image & expand it
         self.camera.capture("image.png")
@@ -135,7 +135,7 @@ class Detection(QObject):
             self.action.emit("guess_nothing")
             sound.textToSound("Nothing")
 
-        self.sound_action("stop")
+        self.sound_action.emit("stop")
 
     def close_all(self):
         """

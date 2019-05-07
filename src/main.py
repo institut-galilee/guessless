@@ -403,6 +403,7 @@ class Application(QWidget):
         if (bt_text == "Shutdown"):
             self.close_all_things()
             self.master.sound_bye.emit()
+            self.master.led_bye.emit()
             time.sleep(5)
             os.system("shutdown now -h")
 

@@ -26,6 +26,7 @@ class Master(QObject):
     led_start = pyqtSignal()
     led_guess = pyqtSignal()
     led_bye = pyqtSignal()
+    sound_speak = pyqtSignal(str)
 
     def __init__(self):
         super().__init__()
@@ -151,6 +152,9 @@ class Sound(QObject):
 
     def bye(self):
         sound.bye()
+
+    def speak(self, text):
+        sound.textToSound(text)
 
 class Led(QObject):
 
@@ -285,6 +289,7 @@ class Application(QWidget):
         self.master.led_start.connect(self.workerLed.start)
         self.master.led_guess.connect(self.workerLed.guess)
         self.master.led_bye.connect(self.workerLed.bye)
+        self.master.sound_speak.connect(self.workerSound.speak)
 
         # Tensorflow's initialization
         self.master.initialization.emit()
@@ -311,6 +316,7 @@ class Application(QWidget):
         self.actionWidgets("hide")
 
         if (action == "guess"):
+            self.master.sound_speak.emit("Guessing")
             self.bt_sound.hide()
             self.bt_quit.hide()
             self.titre_label.setText("Recognising ...")
@@ -326,12 +332,14 @@ class Application(QWidget):
             self.bt_quit.setText("Shutdown")
 
         elif (action == "initialization"):
+            self.master.sound_speak.emit("Initialization")
             self.titre_label.setText("Initialization ...")
             self.titre_label.show()
             self.loading(2)
             self.description_label.show()
 
         elif (action == "init_complete"):
+            self.master.sound_speak.emit("Ready")
             self.actionWidgets("show")
             self.score_label.hide()
             self.bt_sound.hide()
@@ -402,6 +410,7 @@ class Application(QWidget):
     def bye(self):
         bt_text = self.bt_quit.text()
         if (bt_text == "Shutdown"):
+            self.master.sound_speak.emit("Goodbye")
             self.master.sound_bye.emit()
             self.master.led_bye.emit()
             self.close_all_things()

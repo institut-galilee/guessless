@@ -135,11 +135,8 @@ class Detection(QObject):
             sound.textToSound("Nothing")
 
     def close_all(self):
-        """
         self.camera.close()
         cv2.destroyAllWindows()
-        """
-        print("See you later !")
 
 class Sound(QObject):
 
@@ -401,10 +398,10 @@ class Application(QWidget):
     def bye(self):
         bt_text = self.bt_quit.text()
         if (bt_text == "Shutdown"):
-            self.close_all_things()
             self.master.sound_bye.emit()
             self.master.led_bye.emit()
-            time.sleep(5)
+            self.close_all_things()
+            time.sleep(3)
             os.system("shutdown now -h")
 
 def main():

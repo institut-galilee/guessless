@@ -8,8 +8,7 @@ def start() :
     os.system(where_path + "utils && sudo ./video-viewer logo.webm" + params)
 
 def guess() :
-    #os.system(where_path + "bindings/python/samples && sudo python ./pulsing-brightness.py " + params_py)
-    os.system(where_path + "utils && sudo ./video-viewer guess.webm" + params)
+    os.system(where_path + "bindings/python/samples && sudo python ./pulsing-brightness.py " + params_py)
 
 def bye() :
     os.system(where_path + "utils && sudo ./video-viewer bye.webm" + params)

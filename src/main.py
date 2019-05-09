@@ -394,6 +394,10 @@ class Application(QWidget):
         self.close()
         self.thread.quit()
         self.thread.wait(1)
+        self.thread2.quit()
+        self.thread2.wait(1)
+        self.thread3.quit()
+        self.thread3.wait(1)
 
     def bye(self):
         bt_text = self.bt_quit.text()

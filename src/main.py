@@ -413,7 +413,7 @@ class Application(QWidget):
             self.master.sound_bye.emit()
             self.master.led_bye.emit()
             self.close_all_things()
-            time.sleep(3)
+            time.sleep(6)
             os.system("shutdown now -h")
 
 def main():

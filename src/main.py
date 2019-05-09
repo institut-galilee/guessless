@@ -316,7 +316,6 @@ class Application(QWidget):
         self.actionWidgets("hide")
 
         if (action == "guess"):
-            self.master.sound_speak.emit("Guessing")
             self.bt_sound.hide()
             self.bt_quit.hide()
             self.titre_label.setText("Recognising ...")
@@ -332,7 +331,6 @@ class Application(QWidget):
             self.bt_quit.setText("Shutdown")
 
         elif (action == "initialization"):
-            self.master.sound_speak.emit("Initialization")
             self.titre_label.setText("Initialization ...")
             self.titre_label.show()
             self.loading(2)
@@ -393,6 +391,7 @@ class Application(QWidget):
         self.bt_guess.setEnabled(mode)
 
     def guess(self):
+        self.master.sound_speak.emit("Guessing")
         self.master.sound_guess.emit()
         self.master.detection.emit()
         self.master.led_guess.emit()

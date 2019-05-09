@@ -90,6 +90,17 @@ class Detection(QObject):
         self.camera.resolution = (self.IM_WIDTH, self.IM_HEIGHT)
         self.camera.framerate = 10
 
+        # First test of detection
+        # Capture an image & expand it
+        self.camera.capture("image.png")
+        self.image = cv2.imread("image.png")
+        self.image_expanded = np.expand_dims(self.image, axis=0)
+
+        # Detection
+        (boxes, scores, classes, num) = self.sess.run(
+        [self.detection_boxes, self.detection_scores, self.detection_classes, self.num_detections],
+        feed_dict={self.image_tensor: self.image_expanded})
+        
         self.action.emit("init_complete")
 
     def detect(self):

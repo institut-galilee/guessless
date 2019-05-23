@@ -1,5 +1,8 @@
 # **Guessless Project**
 
+## Promotional video :
+(https://www.youtube.com/watch?v=Eu7Z_zg069Q&feature=youtu.be)
+
 ## Membres :
 * Maher LAAROUSSI (maher.laaroussi@gmail.com) [MaherLRS](https://github.com/maherlaaroussi "maherlaaroussi")
 * Aboubakr CHOUTTA (achoutta@gmail.com)  [aboubakrCH](https://github.com/aboubakrCH "aboubakrCH")
